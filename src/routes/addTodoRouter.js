@@ -18,6 +18,7 @@ addTodoRouter.route("/add/todo").post(function(req, res) {
       newTodo
         .save()
         .then(item => {
+          console.log(item);
           res.json("Todo added successfully on MongoDB");
         })
         .catch(err => {

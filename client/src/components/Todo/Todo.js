@@ -13,7 +13,7 @@ class Todo extends Component {
     super(props);
     this.TodoService = new TodoService();
   }
-  componentDidMount() {
+  componentWillMount() {
     console.log("Set 1 Fetch Data");
     axios
       .get("http://localhost:4200/service")
