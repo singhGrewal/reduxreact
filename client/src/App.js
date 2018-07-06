@@ -1,18 +1,24 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "../src/components/Home";
+import AddItem from "../src/components/AddItem";
+import IndexItem from "../src/components/IndexItem";
+import Todo from "../src/components/Todo/Todo";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="container">
+        <div className="row">
+          <Router>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/add-item" component={AddItem} />
+              <Route path="/index" component={IndexItem} />
+              <Route path="/todo" component={Todo} />
+            </Switch>
+          </Router>
+        </div>
       </div>
     );
   }

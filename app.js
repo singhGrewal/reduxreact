@@ -9,6 +9,7 @@ var app = express();
 const db = require("./config/keys").mongoURI;
 
 // Connect to MongoDB
+
 mongoose
   .connect(db)
   .then(() => console.log("MongoDB Connected"))
@@ -16,6 +17,7 @@ mongoose
 
 // Required application specific custom router module
 const itemRouter = require("./src/routes/itemRouter");
+const addTodoRouter = require("./src/routes/addTodoRouter");
 
 app.use(cors());
 
@@ -25,6 +27,7 @@ app.use(bodyParser.json());
 
 // Use Routes
 app.use("/items", itemRouter);
+app.use("/service", addTodoRouter);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {

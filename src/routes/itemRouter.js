@@ -9,10 +9,11 @@ var Item = require("../models/Item");
 itemRouter.route("/add/post").post(function(req, res) {
   console.log("itemRouter /add/post 0", req.body);
   var item = new Item(req.body);
+  console.log("itemRouter item", item);
   item
     .save()
     .then(item => {
-      res.json("Item added successfully");
+      res.json("Item added successfully", item);
     })
     .catch(err => {
       res.status(400).send("unable to save to database");
