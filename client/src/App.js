@@ -9,16 +9,16 @@ import Layout from "./components/layout/Layout";
 class App extends Component {
   render() {
     return (
-      <Layout>
-        <Router>
+      <Router>
+        <Layout>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/add-item" component={AddItem} />
             <Route path="/index" component={IndexItem} />
             <Route path="/todo" component={Todo} />
           </Switch>
-        </Router>
-      </Layout>
+        </Layout>
+      </Router>
     );
   }
 }

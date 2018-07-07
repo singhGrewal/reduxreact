@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Layout extends Component {
   render() {
@@ -6,6 +7,12 @@ class Layout extends Component {
       <div className="container">
         <div className="row">
           <h1>Header will be here</h1>
+
+          <ul>
+            <li>
+              <Link to="/todo">Todo</Link>
+            </li>
+          </ul>
 
           <div>{this.props.children}</div>
           <p>Footer will be here</p>
