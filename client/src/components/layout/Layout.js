@@ -12,6 +12,15 @@ class Layout extends Component {
             <li>
               <Link to="/todo">Todo</Link>
             </li>
+            <li>
+              <Link to="/add-item">add-item</Link>
+            </li>
+            <li>
+              <Link to="/index">index</Link>
+            </li>
+            <li>
+              <Link to="/edit/:id">/edit/:id</Link>
+            </li>
           </ul>
 
           <div>{this.props.children}</div>

@@ -38,10 +38,18 @@ addTodoRouter.route("/").get(function(req, res) {
       res.json(items);
     }
   });
+});
 
-  // TodoModel.findOne({}, {}, { sort: { created_at: -1 } }, function(err, post) {
-  //   console.log("post", post);
-  // });
+addTodoRouter.route("/delete/todo").post(function(req, res) {
+  console.log("Server Delete Todo", req.body);
+  TodoModel.findByIdAndRemove({ _id: req.body.id }, function(err, item) {
+    // if (err) res.json(err);
+    // else res.json("Successfully removed");
+
+    if (err) {
+      console.log("Delete", err);
+    } else res.json("Successfully removed");
+  });
 });
 
 module.exports = addTodoRouter;

@@ -5,6 +5,7 @@ import AddItem from "../src/components/AddItem";
 import IndexItem from "../src/components/IndexItem";
 import Todo from "../src/components/Todo/Todo";
 import Layout from "./components/layout/Layout";
+import EditItem from "./components/EditItem";
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
             <Route path="/add-item" component={AddItem} />
             <Route path="/index" component={IndexItem} />
             <Route path="/todo" component={Todo} />
+            <Route path="/edit/:id" component={EditItem} />
           </Switch>
         </Layout>
       </Router>

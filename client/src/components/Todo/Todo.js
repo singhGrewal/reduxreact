@@ -14,27 +14,15 @@ class Todo extends Component {
     this.TodoService = new TodoService();
   }
   componentWillMount() {
-    console.log("Set 1 Fetch Data");
-    axios
-      .get("http://localhost:4200/service")
-      .then(response => {
-        // this.setState({ items: response.data });
-        const toDoList = response.data;
-        console.log("Set 2 Fetch Data", response.data);
-        this.props.createTodo(toDoList);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-    // this.fetchTodoList();
+    this.fetchTodoList();
+    // setInterval(this.fetchTodoList, 2000);
   }
 
-  fetchTodoList() {
+  fetchTodoList = () => {
     console.log("Fetch Data");
     axios
       .get("http://localhost:4200/service")
       .then(response => {
-        // this.setState({ items: response.data });
         const toDoList = response.data;
         console.log("Set 2 Fetch Data", response.data);
         this.props.createTodo(toDoList);
@@ -42,15 +30,15 @@ class Todo extends Component {
       .catch(function(error) {
         console.log(error);
       });
-  }
+  };
 
   handleSubmit = e => {
     e.preventDefault();
     const todo = this.getTodo.value;
     console.log("Step 1 send data", todo);
     this.TodoService.sendData(todo);
+    this.fetchTodoList;
     this.props.history.push("/todo");
-    this.fetchTodoList();
   };
 
   todoBody() {
