@@ -6,7 +6,7 @@ class TodoService {
   sendData(data) {
     console.log("Step 2 send data", data);
     axios
-      .post("http://localhost:4200/service/add/todo", {
+      .post("/service/add/todo", {
         TodoList: data
       })
       .then(function(response) {
@@ -26,7 +26,7 @@ class TodoService {
   deleteData(data) {
     console.log("Delete send to server data", data);
     axios
-      .post("http://localhost:4200/service/delete/todo", {
+      .post("/service/delete/todo", {
         id: data
       })
       .then(function(response) {
@@ -46,7 +46,7 @@ class TodoService {
   editData(data) {
     console.log("Edit send to server data", data);
     // axios
-    //   .post("http://localhost:4200/service/delete/todo", {
+    //   .post("/service/delete/todo", {
     //     id: data
     //   })
     //   .then(function(response) {

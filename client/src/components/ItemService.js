@@ -4,7 +4,7 @@ class ItemService {
   sendData(data) {
     console.log("data", data);
     axios
-      .post("http://localhost:4200/items/add/post", {
+      .post("/items/add/post", {
         item: data
       })
       .then(function(response) {
@@ -17,7 +17,7 @@ class ItemService {
 
   updateData(data, id) {
     axios
-      .post("http://localhost:4200/items/update/" + id, {
+      .post("/items/update/" + id, {
         item: data
       })
       .then(res => this.setState({ items: res.data }))
@@ -26,7 +26,7 @@ class ItemService {
 
   deleteData(id) {
     axios
-      .get("http://localhost:4200/items/delete/" + id)
+      .get("/items/delete/" + id)
       .then(console.log("Deleted").catch(err => console.log(err)));
   }
 }

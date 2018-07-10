@@ -21,7 +21,7 @@ class Todo extends Component {
   fetchTodoList = () => {
     console.log("Fetch Data");
     axios
-      .get("http://localhost:4200/service")
+      .get("/service")
       .then(response => {
         const toDoList = response.data;
         console.log("Set 2 Fetch Data", response.data);

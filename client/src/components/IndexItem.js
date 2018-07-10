@@ -12,7 +12,7 @@ class IndexItem extends Component {
   componentDidMount() {
     console.log("Create request to fetch Items 3");
     axios
-      .get("http://localhost:4200/items")
+      .get("/items")
       .then(response => {
         this.setState({ items: response.data });
       })
