@@ -1,15 +1,19 @@
-var express = require("express");
-var mongoose = require("mongoose");
-var bodyParser = require("body-parser");
-var cors = require("cors");
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const passport = require("passport");
 const path = require("path");
-var app = express();
+const app = express();
 
 // DB Config
 const db = require("./config/keys").mongoURI;
 
-// Connect to MongoDB
+// Body parser middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
+// Connect to MongoDB
 mongoose
   .connect(db)
   .then(() => console.log("MongoDB Connected"))
@@ -22,9 +26,11 @@ const auth = require("./src/routes/auth");
 
 app.use(cors());
 
-// Body parser middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport Config
+require("./config/passport")(passport);
 
 // Use Routes
 app.use("/items", itemRouter);

@@ -3,6 +3,9 @@ const app = express();
 const auth = express.Router();
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const keys = require("../../config/keys");
+const passport = require("passport");
 
 // @route   POST api/register
 // @desc    Register user
@@ -45,9 +48,22 @@ auth.post("/login", (req, res) => {
     if (!user) {
       return res.status(400).json({ email: "User not found" });
     } else {
+      // Check Password
       bcrypt.compare(password, user.password).then(isMatch => {
         if (isMatch) {
           res.json({ msg: "Success : Password matched" });
+          const payload = { id: user.id, name: user.name };
+          jwt.sign(
+            payload,
+            keys.secretOrKey,
+            { expiresIn: 36000 },
+            (err, token) => {
+              res.json({
+                success: true,
+                token: "Bearer" + token
+              });
+            }
+          );
         } else {
           return res.status(400).json({ password: "Incorrect Password" });
         }
@@ -55,5 +71,20 @@ auth.post("/login", (req, res) => {
     }
   });
 });
+
+// @route   GET api/users/current
+// @desc    Return current user
+// @access  Private
+router.get(
+  "/current",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.json({
+      id: req.user.id,
+      name: req.user.name,
+      email: req.user.email
+    });
+  }
+);
 
 module.exports = auth;
