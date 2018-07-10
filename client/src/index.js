@@ -1,33 +1,19 @@
-// import React from "react";
-// import ReactDOM from "react-dom";
-// import { BrowserRouter as Router, Route } from "react-router-dom";
-
-// import App from "./App";
-// import AddItem from "./components/AddItem";
-// import IndexItem from "./components/IndexItem";
-
-// ReactDOM.render(
-//   <Router>
-//     <div>
-//       <Route exact path="/" component={App} />
-//       <Route path="/add-item" component={AddItem} />
-//       <Route path="/index" component={IndexItem} />
-//     </div>
-//   </Router>,
-//   document.getElementById("root")
-// );
-
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
-
+import { applyMiddleware, createStore } from "redux";
+import thunkMiddleware from "redux-thunk";
+import { createLogger } from "redux-logger";
 import rootReducer from "./reducer/index";
+import "./index.css";
+import App from "./App";
 
-const store = createStore(rootReducer);
+const loggerMiddleware = createLogger();
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunkMiddleware, loggerMiddleware)
+);
 
 store.subscribe(() => {
   console.log("store : ", store.getState());

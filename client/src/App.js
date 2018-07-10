@@ -13,11 +13,12 @@ class App extends Component {
       <Router>
         <Layout>
           <Switch>
-            <Route exact path="/" component={Home} />
+            {/* <Route  path="/" component={Home} /> */}
             <Route path="/add-item" component={AddItem} />
             <Route path="/index" component={IndexItem} />
             <Route path="/todo" component={Todo} />
             <Route path="/edit/:id" component={EditItem} />
+            <Route exact path="/" component={Login} />
           </Switch>
         </Layout>
       </Router>
