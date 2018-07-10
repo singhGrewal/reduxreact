@@ -18,6 +18,7 @@ mongoose
 // Required application specific custom router module
 const itemRouter = require("./src/routes/itemRouter");
 const addTodoRouter = require("./src/routes/addTodoRouter");
+const auth = require("./src/routes/auth");
 
 app.use(cors());
 
@@ -28,6 +29,7 @@ app.use(bodyParser.json());
 // Use Routes
 app.use("/items", itemRouter);
 app.use("/service", addTodoRouter);
+app.use("/api", auth);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {

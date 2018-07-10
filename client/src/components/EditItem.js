@@ -13,7 +13,7 @@ class EditItem extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:4200/items/edit/" + this.props.match.params.id)
+      .get("/items/edit/" + this.props.match.params.id)
       // console.log("Edit mode")
       .then(response => {
         this.setState({ value: response.data });
