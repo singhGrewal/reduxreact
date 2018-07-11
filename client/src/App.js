@@ -6,6 +6,7 @@ import IndexItem from "../src/components/IndexItem";
 import Todo from "../src/components/Todo/Todo";
 import Layout from "./components/layout/Layout";
 import EditItem from "./components/EditItem";
+import Login from "./components/Login/Login";
 
 class App extends Component {
   render() {
