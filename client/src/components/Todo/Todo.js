@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Todo.css";
 import CreateList from "./CreateList";
 import TodoHeader from "./TodoHeader";
-import TodoForm from "./TodoForm";
+// import TodoForm from "./TodoForm";
 import { createTodo } from "../../action/Todo_action";
 import { connect } from "react-redux";
 import TodoService from "../Service/TodoService";
@@ -37,7 +37,7 @@ class Todo extends Component {
     const todo = this.getTodo.value;
     console.log("Step 1 send data", todo);
     this.TodoService.sendData(todo);
-    this.fetchTodoList;
+    // this.fetchTodoList;
     this.props.history.push("/todo");
   };
 

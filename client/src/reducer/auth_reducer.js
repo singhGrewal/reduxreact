@@ -1,4 +1,5 @@
-import { GET_ERRORS, SET_CURRENT_USER, TEST_DIS } from "../action/types";
+import { SET_CURRENT_USER } from "../action/types";
+import isEmpty from "../validation/is-empty";
 
 const initialState = {
   isAuthenticated: false,
@@ -7,12 +8,13 @@ const initialState = {
 
 const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "TEST_DIS":
+    case SET_CURRENT_USER:
+      console.log("login reducer");
       return {
         ...state,
+        isAuthenticated: !isEmpty(action.payload),
         user: action.payload
       };
-
     default:
       return state;
   }

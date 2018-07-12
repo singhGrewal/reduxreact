@@ -11,9 +11,11 @@ const passport = require("passport");
 // @desc    Register user
 // @access  Public
 auth.post("/register", (req, res) => {
+  console.log("IN the api/register");
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
       //   errors.email = "Email already exists";
+      console.log("Email already exist");
       return res.status(400).json("Email already exists");
     } else {
       const newUser = new User({
@@ -21,7 +23,7 @@ auth.post("/register", (req, res) => {
         email: req.body.email,
         password: req.body.password
       });
-
+      console.log("Creating new user");
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
@@ -44,37 +46,39 @@ auth.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  User.findOne({ email }).then(user => {
-    console.log("USer", user, email, password);
-    if (!user) {
-      console.log("Email not found");
-      return res.status(400).json({ email: "User not found" });
-    } else {
-      // Check Password
-      console.log("User found with email : ", email);
-      bcrypt.compare(password, user.password).then(isMatch => {
-        if (isMatch) {
-          console.log("Password matched : ");
-          // res.json({ msg: "Success : Password matched" });
-          const payload = { id: user.id, name: user.name };
-          jwt.sign(
-            payload,
-            keys.secretOrKey,
-            { expiresIn: 36000 },
-            (err, token) => {
-              res.json({
-                success: true,
-                token: "Bearer" + token
-              });
-            }
-          );
-        } else {
-          console.log("Password DID not matched : ");
-          return res.status(400).json({ password: "Incorrect Password" });
-        }
-      });
-    }
-  });
+  User.findOne({ email })
+    .then(user => {
+      console.log("USer", user, email, password);
+      if (!user) {
+        console.log("Email not found");
+        return res.status(400).json({ email: "User not found" });
+      } else {
+        // Check Password
+        console.log("User found with email : ", email);
+        bcrypt.compare(password, user.password).then(isMatch => {
+          if (isMatch) {
+            console.log("Password matched : ");
+            // res.json({ msg: "Success : Password matched" });
+            const payload = { id: user.id, name: user.name };
+            jwt.sign(
+              payload,
+              keys.secretOrKey,
+              { expiresIn: 36000 },
+              (err, token) => {
+                res.json({
+                  success: true,
+                  token: "Bearer" + token
+                });
+              }
+            );
+          } else {
+            console.log("Password DID not matched : ");
+            return res.status(400).json({ password: "Incorrect Password" });
+          }
+        });
+      }
+    })
+    .catch(err => console.log(err));
 });
 
 // @route   GET api/current
