@@ -55,15 +55,15 @@ class Login extends Component {
   errorMessage() {
     if (this.state.errors.password) {
       return (
-        <div className="alert alert-danger">{this.state.errors.password}</div>
+        <div class="alert alert-danger" role="alert">
+          {this.state.errors.password}
+        </div>
       );
     }
   }
 
   render() {
     const { errors } = this.state;
-    console.log("login error", errors);
-    console.log("login error", errors.password);
     return (
       <div className="login">
         <div className="container">
@@ -83,7 +83,9 @@ class Login extends Component {
                     value={this.state.email}
                     onChange={this.onChange}
                   />
-                  {errors.email}
+                  {errors.email && (
+                    <span className="text-danger">{errors.email}</span>
+                  )}
                 </div>
                 <div className="form-group">
                   <input
@@ -94,7 +96,9 @@ class Login extends Component {
                     value={this.state.password}
                     onChange={this.onChange}
                   />
-                  {errors.password}
+                  {errors.password && (
+                    <span className="text-danger">{errors.password}</span>
+                  )}
                 </div>
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
